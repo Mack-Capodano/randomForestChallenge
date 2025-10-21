@@ -213,31 +213,6 @@ For the decision trees the training RMSE starts lower than the test RMSE and qui
 
 ### 3. Linear Regression vs Random Forest Comparison
 
-**Your Task:** Compare random forests to linear regression baseline.
-
-**Create a comparison table showing:**
-- Linear Regression RMSE
-- Random Forest (1 tree) RMSE  
-- Random Forest (100 trees) RMSE
-- Random Forest (1000 trees) RMSE
-
-**Your analysis should address:**
-- The improvement in RMSE when going from 1 tree to 100 trees
-- Whether switching from linear regression to 100-tree random forest shows similar improvement
-- When random forests are worth the added complexity vs linear regression
-- The trade-offs between interpretability and performance
-
-::: {.callout-important}
-## 📊 Comparison Requirements
-
-Create a clear table comparing:
-
-- Linear Regression
-- Random Forest (1 tree)
-- Random Forest (100 trees) 
-- Random Forest (1000 trees)
-
-Include percentage improvements over linear regression for each random forest model.
 :::
 
 ```{r}
@@ -277,4 +252,4 @@ knitr::kable(comparison_df,
              caption = "Linear Regression vs Random Forest Comparison")
 ```
 
-Random forests are supposed ot beb eter with no nlineratiries, but hthe homogenous data cuses in this case perhaps linear regression to be more helpful. 1 tree is awful but p to 100 and 1000 they are comperable.
+The results show that linear regression slightly outperforms all random forest models on this dataset. Random forests are generally expected to perform better when there are nonlinear relationships, but the data here appears fairly homogeneous and linear, which helps the linear model perform best. The 1 tree random forest performs poorly by overfitting, but as the number of trees increases to 100 and 1000, performance becomes comparable to linear regression. The 100 and 1000 tree models reduce error drastically relative to the single tree, though they still fall short of the regression. Overall the added complexity of random forests did not yield a significant gain here. In other datasets random forests likely be expected to outperform, but for this housing data linear regression remains the most efficient and interpretable choice.
