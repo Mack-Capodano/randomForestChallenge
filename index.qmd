@@ -12,7 +12,7 @@ execute:
 
 ```{r}
 #| label: load-and-model-r
-#| echo: true
+#| echo: false
 #| message: false
 #| warning: false
 
@@ -56,7 +56,7 @@ rf_5000 <- randomForest(SalePrice ~ ., data = train_data, ntree = 5000, mtry = 3
 
 ```{r}
 #| label: performance-comparison-r
-#| echo: true
+#| echo: false
 #| message: false
 #| warning: false
 #| fig-width: 10
@@ -123,7 +123,6 @@ performance_df <- data.frame(
 print(performance_df)
 ```
 
-## Questions:
 
 ### 1. The Power of More Trees Visualization
 
@@ -136,7 +135,7 @@ print(performance_df)
 plot(performance_df$Trees, performance_df$RMSE_Test,
      type = "b", col = "blue", pch = 19, log = "x",
      xlab = "Number of Trees", ylab = "RMSE",
-     main = "RMSE vs Number of Trees",
+     main = "RMSE Falls as Number of Trees Increases",
      ylim = range(c(performance_df$RMSE_Test, performance_df$RMSE_Train)))
 lines(performance_df$Trees, performance_df$RMSE_Train,
       type = "b", col = "red", pch = 17)
@@ -153,12 +152,12 @@ legend("topright", c("Test RMSE", "Train RMSE"),
 plot(performance_df$Trees, performance_df$R_squared,
      type = "b", col = "darkgreen", pch = 19, log = "x",
      xlab = "Number of Trees", ylab = "R-squared",
-     main = "R-squared vs Number of Trees",
+     main = "R-squared Goes Pp as  Number of Tree Increases ",
      ylim = c(0.6, 0.9))
 ```
 
 
-The most dramatic improvement in performance happens as the model jumps from 1 to 5 trees. The improvement in this jump from 1-5 is similar if not larger than the improvement from 5 all the way to 5000. This is true for both the train and test RMSEs and the R-Squared Value. This shows the concept of diminishing returns from adding more trees where each additional tree leads to a smaller and smaller improvement until each indiviudal tree causes no discernible change in the RMSE or R-Squared Value. And the real "valuable" trees are the earliest ones.
+The most dramatic improvement in performance happens as the model jumps from 1 to 5 trees. The improvement in this jump from 1-5 is similar if not larger than the improvement from 5 all the way to 5000. This is true for both the train and test RMSEs and the R-Squared Value. This shows the concept of diminishing returns from adding more trees where each additional tree leads to a smaller and smaller improvement until each indiviudal tree causes no discernible change in the RMSE or R-Squared Value. And the real "valuable" trees in terms of the largest effect on error and r-sqaured are the earliest ones.
 :::
 
 ### 2. Overfitting Visualization and Analysis
@@ -208,7 +207,10 @@ legend("topright", c("Training RMSE", "Test RMSE"),
        col = c("red", "blue"), pch = c(17, 19), lty = 1)
 ```
 
-For the decision trees the training RMSE starts lower than the test RMSE and quickly becomes much lower as the test begins to actually get worse. This shows overfitting as the model starts to memorize the training data and overfits to it, leading to the test RMSE swinging hard and even increasing at times as max depth increases. The random forest shows how both training and test improve as approaching max depth. Random forest don't suffer from overfitting because of bootstrap sampling, random feature selection, and averaging the trees. Bootstrap sampling helps prevent overfitting through resampling the data and allowing the model to be re-built on different data. Random feature selection helps prevent overfitting by randomly selecting subsets of features to train on preventing the model from overfitting to one feature. Averaging the trees helps to reduce the variance of the model, preventing overfitting. This is why random forests can avoid overfitting whereas decision trees fail to do so.
+For the decision trees the training RMSE starts lower than the test RMSE and quickly becomes much lower as the test begins to actually get worse. This means as the complexity increases, overfitting can start to occur. Overfitting here gets caused as the model starts to memorize the training data and overfits to it, leading to the test RMSE swinging hard and even increasing at times as max depth increases. The random forest shows how both training and test improve as approaching max depth. The train data does wind up far lower then the test showing that you can't justu se your training data as that would be overly optimistic.Random forest don't suffer from overfitting even when increasing trees, because of bootstrap sampling, random feature selection, and averaging the trees. Bootstrap sampling helps prevent overfitting through resampling the data and allowing the model to be re-built on different data. Random feature selection helps prevent overfitting by randomly selecting subsets of features to train on preventing the model from overfitting to one feature. Averaging the trees helps to reduce the variance of the model, preventing overfitting. This is why random forests can avoid overfitting whereas decision trees fail to do so. 
+
+
+
 ### 3. Linear Regression vs Random Forest Comparison
 
 **Your Task:** Compare random forests to linear regression baseline.
@@ -274,3 +276,5 @@ knitr::kable(comparison_df,
              col.names = c("Model", "Test RMSE", "% Improvement vs Linear Regression"),
              caption = "Linear Regression vs Random Forest Comparison")
 ```
+
+Random forests are supposed ot beb eter with no nlineratiries, but hthe homogenous data cuses in this case perhaps linear regression to be more helpful. 1 tree is awful but p to 100 and 1000 they are comperable.
