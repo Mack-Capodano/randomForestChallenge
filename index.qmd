@@ -152,7 +152,7 @@ legend("topright", c("Test RMSE", "Train RMSE"),
 plot(performance_df$Trees, performance_df$R_squared,
      type = "b", col = "darkgreen", pch = 19, log = "x",
      xlab = "Number of Trees", ylab = "R-squared",
-     main = "R-squared Goes Pp as  Number of Tree Increases ",
+     main = "R-squared Goes Up as  Number of Tree Increases ",
      ylim = c(0.6, 0.9))
 ```
 
@@ -207,7 +207,7 @@ legend("topright", c("Training RMSE", "Test RMSE"),
        col = c("red", "blue"), pch = c(17, 19), lty = 1)
 ```
 
-For the decision trees the training RMSE starts lower than the test RMSE and quickly becomes much lower as the test begins to actually get worse. This means as the complexity increases, overfitting can start to occur. Overfitting here gets caused as the model starts to memorize the training data and overfits to it, leading to the test RMSE swinging hard and even increasing at times as max depth increases. The random forest shows how both training and test improve as approaching max depth. The train data does wind up far lower then the test showing that you can't justu se your training data as that would be overly optimistic.Random forest don't suffer from overfitting even when increasing trees, because of bootstrap sampling, random feature selection, and averaging the trees. Bootstrap sampling helps prevent overfitting through resampling the data and allowing the model to be re-built on different data. Random feature selection helps prevent overfitting by randomly selecting subsets of features to train on preventing the model from overfitting to one feature. Averaging the trees helps to reduce the variance of the model, preventing overfitting. This is why random forests can avoid overfitting whereas decision trees fail to do so. 
+For the decision trees the training RMSE starts lower than the test RMSE and quickly becomes much lower as the test begins to actually get worse. This means as the complexity increases, overfitting can start to occur. Overfitting here gets caused as the model starts to memorize the training data and overfits to it, leading to the test RMSE swinging hard and even increasing at times as max depth increases. The random forest shows how both training and test improve as approaching max depth. The train data does wind up far lower then the test showing that you can't just use your training data as that would be overly optimistic.Random forest don't suffer from overfitting even when increasing trees, because of bootstrap sampling, random feature selection, and averaging the trees. Bootstrap sampling helps prevent overfitting through resampling the data and allowing the model to be re-built on different data. Random feature selection helps prevent overfitting by randomly selecting subsets of features to train on preventing the model from overfitting to one feature. Averaging the trees helps to reduce the variance of the model, preventing overfitting. This is why random forests can avoid overfitting whereas decision trees fail to do so. 
 
 
 
